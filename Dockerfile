@@ -19,7 +19,9 @@ RUN chmod 755 /app/public/uploads && chown -R www-data:www-data /app/public /app
 FROM ospos AS ospos_test
  
 COPY --from=composer /usr/bin/composer /usr/bin/composer
- 
+
+RUN apt-get install -y libzip-dev
+RUN docker-php-ext-install zip
 RUN composer install -d/app 
 RUN php /app/vendor/kenjis/ci-phpunit-test/install.php -a /app/application -p /app/vendor/codeigniter/framework
  
