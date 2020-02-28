@@ -24,6 +24,7 @@ RUN apt-get install -y libzip-dev
 RUN docker-php-ext-install zip
 RUN composer install -d/app 
 RUN php /app/vendor/kenjis/ci-phpunit-test/install.php -a /app/application -p /app/vendor/codeigniter/framework
+RUN sed -i 's/backupGlobals="true"/backupGlobals="false"/g' /app/application/tests/phpunit.xml
  
 WORKDIR /app/application/tests
  
